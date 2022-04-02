@@ -35,6 +35,7 @@ local InfoTags = {
 	["druidform"] = true,
 	["civilian"] = true,
 	["pvp"] = true,
+	["pvptime"] = true,
 	["rank"] = true,
 	["numrank"] = true,
 	["faction"] = true,
