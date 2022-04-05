@@ -1275,6 +1275,7 @@ local tagEvents = {
 	["buffcount"]           = "UNIT_AURA",
 	["numheals"]            = "HealComm_HealStarted HealComm_HealUpdated HealComm_HealStopped HealComm_GUIDDisappeared",
 	["pvp"]                 = "PLAYER_FLAGS_CHANGED UNIT_FACTION",
+	["pvptime"]		= "PLAYER_FLAGS_CHANGED",
 	["smarthealth"]         = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_CONNECTION",
 	["smarthealthp"]        = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_CONNECTION",
 	["ssmarthealth"]        = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_CONNECTION",
