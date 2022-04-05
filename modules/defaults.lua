@@ -13,6 +13,7 @@ SML:Register(SML.MediaType.FONT, "Vera Serif", "Interface\\AddOns\\LunaUnitFrame
 SML:Register(SML.MediaType.FONT, "Myriad", "Interface\\AddOns\\LunaUnitFrames\\media\\fonts\\Myriad.ttf")
 SML:Register(SML.MediaType.BACKGROUND, "Chat Frame", "Interface\\ChatFrame\\ChatFrameBackground")
 SML:Register(SML.MediaType.STATUSBAR, "Minimalist", "Interface\\AddOns\\LunaUnitFrames\\media\\textures\\bars\\Minimalist")
+SML:Register(SML.MediaType.STATUSBAR, "Flat", "Interface\\AddOns\\LunaUnitFrames\\media\\textures\\bars\\Flat")
 
 function LUF:LoadDefaults()
 
