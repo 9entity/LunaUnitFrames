@@ -434,6 +434,14 @@ local tagStrings = {
 
 	["pvp"] = [[function(unit) return UnitIsPVP(unit) and PVP or "" end]],
 
+	["pvptime"] = [[function(unit)
+		if( GetPVPTimer() >= 300000 ) then return nil end
+		local status = PVP..":%s"
+		if( status ) then
+			return string.format(status, formatTime((GetPVPTimer() - 2000) / 1000))
+		end
+	end]],
+
 	["smarthealth"] = [[function(unit)
 		local hp
 		local maxhp
