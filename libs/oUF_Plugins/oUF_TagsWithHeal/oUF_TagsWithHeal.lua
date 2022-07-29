@@ -441,6 +441,14 @@ local tagStrings = {
 	["numheals"] = [[function(unit) return LHC:GetNumHeals(UnitGUID(unit), GetTime() + GetHealTimeFrame()) end]],
 
 	["pvp"] = [[function(unit) return UnitIsPVP(unit) and PVP or "" end]],
+	
+	["pvptime"] = [[function(unit)
+		if( GetPVPTimer() >= 300000 ) then return nil end
+		local status = PVP..":%s"
+		if( status ) then
+			return string.format(status, formatTime((GetPVPTimer() - 2000) / 1000))
+		end
+	end]],
 
 	["smarthealth"] = [[function(unit)
 		local hp
@@ -1280,6 +1288,7 @@ local tagEvents = {
 	["buffcount"]           = "UNIT_AURA",
 	["numheals"]            = "HealComm_HealStarted HealComm_HealUpdated HealComm_HealStopped HealComm_GUIDDisappeared",
 	["pvp"]                 = "PLAYER_FLAGS_CHANGED UNIT_FACTION",
+	["pvptime"]		= "PLAYER_FLAGS_CHANGED",
 	["smarthealth"]         = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_CONNECTION",
 	["smarthealthp"]        = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_CONNECTION",
 	["ssmarthealth"]        = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_CONNECTION",
