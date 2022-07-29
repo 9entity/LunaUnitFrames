@@ -351,6 +351,7 @@ local L = {
 ["druidform"] = "Current druid form of friendly unit",
 ["civilian"] = "Returns '("..DISHONORABLE_KILLS..")' when civilian",
 ["pvp"] = "Displays '"..PVP.."' if flagged for it",
+["pvptime"] = "Displays '"..PVP.."'timer if flagged for it",
 ["rank"] = "PvP title",
 ["numrank"] = "Numeric PvP rank",
 ["faction"] = "Horde or Alliance",
