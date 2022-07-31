@@ -287,7 +287,8 @@ function LUF:LoadDefaults()
 				ready = { enabled = true, anchorPoint = "LEFT", size = 24, x = 25, y = 0 },
 				status = { enabled = true, anchorPoint = "BOTTOMLEFT", size = 16, x = 30, y = 1 },
 				rezz = { enabled = true, anchorPoint = "LEFT", size = 20, x = 25, y = 0 },
-				role = { enabled = false, anchorPoint = "TOPLEFT", size = 12, x = 28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOMLEFT", size = 12, x = 17, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOPLEFT", size = 12, x = 28, y = -1 },
 			},
 			incHeal = { enabled = true, cap = 1.3, alpha = 0.8 },
 			slots = {
@@ -899,7 +900,8 @@ function LUF:LoadDefaults()
 				pvp = { enabled = true, anchorPoint = "RIGHT", size = 30, x = 1, y = 0 },
 				status = { enabled = true, anchorPoint = "BOTTOMRIGHT", size = 16, x = -30, y = 1 },
 				rezz = { enabled = true, anchorPoint = "RIGHT", size = 20, x = -25, y = 0 },
-				role = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOMRIGHT", size = 12, x = -17, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
 			},
 			incHeal = {enabled = true, cap = 1.3, alpha = 0.8},
 			slots = {
@@ -1047,7 +1049,8 @@ function LUF:LoadDefaults()
 				pvp = { enabled = true, anchorPoint = "RIGHT", size = 30, x = 1, y = 0 },
 				status = { enabled = true, anchorPoint = "BOTTOMRIGHT", size = 16, x = -30, y = 1 },
 				rezz = { enabled = true, anchorPoint = "CENTER", size = 20, x = 0, y = 0 },
-				role = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOMRIGHT", size = 12, x = -17, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
 			},
 			incHeal = { enabled = false, cap = 1.3, alpha = 0.8 },
 			slots = {
@@ -1195,7 +1198,8 @@ function LUF:LoadDefaults()
 				pvp = { enabled = true, anchorPoint = "RIGHT", size = 30, x = 1, y = 0 },
 				status = { enabled = true, anchorPoint = "BOTTOMRIGHT", size = 16, x = -30, y = 1 },
 				rezz = { enabled = true, anchorPoint = "CENTER", size = 20, x = 0, y = 0 },
-				role = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOMRIGHT", size = 12, x = -17, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
 			},
 			incHeal = { enabled = false, cap = 1.3, alpha = 0.8 },
 			slots = {
@@ -1359,7 +1363,8 @@ function LUF:LoadDefaults()
 				pvp = { enabled = true, anchorPoint = "RIGHT", size = 30, x = 1, y = 0 },
 				status = { enabled = true, anchorPoint = "BOTTOMRIGHT", size = 16, x = -30, y = 1 },
 				rezz = { enabled = true, anchorPoint = "CENTER", size = 20, x = 0, y = 0 },
-				role = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOMLEFT", size = 12, x = 17, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOPLEFT", size = 12, x = 28, y = -1 },
 			},
 			incHeal = { enabled = false, cap = 1.3, alpha = 0.8 },
 			slots = {
@@ -1507,7 +1512,8 @@ function LUF:LoadDefaults()
 				pvp = { enabled = true, anchorPoint = "RIGHT", size = 30, x = 1, y = 0 },
 				status = { enabled = true, anchorPoint = "BOTTOMRIGHT", size = 16, x = -30, y = 1 },
 				rezz = { enabled = true, anchorPoint = "CENTER", size = 20, x = 0, y = 0 },
-				role = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOMLEFT", size = 12, x = 17, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOPLEFT", size = 12, x = 28, y = -1 },
 			},
 			incHeal = { enabled = false, cap = 1.3, alpha = 0.8 },
 			slots = {
@@ -1655,7 +1661,8 @@ function LUF:LoadDefaults()
 				pvp = { enabled = true, anchorPoint = "RIGHT", size = 30, x = 1, y = 0 },
 				status = { enabled = true, anchorPoint = "BOTTOMRIGHT", size = 16, x = -30, y = 1 },
 				rezz = { enabled = true, anchorPoint = "CENTER", size = 20, x = 0, y = 0 },
-				role = { enabled = false, anchorPoint = "TOPRIGHT", size = 12, x = -28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOMLEFT", size = 12, x = 17, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOPLEFT", size = 12, x = 28, y = -1 },
 			},
 			incHeal = { enabled = false, cap = 1.3, alpha = 0.8 },
 			slots = {
@@ -1819,7 +1826,8 @@ function LUF:LoadDefaults()
 				ready = { enabled = true, anchorPoint = "LEFT", size = 24, x = 25, y = 0 },
 				status = { enabled = true, anchorPoint = "BOTTOMLEFT", size = 16, x = 30, y = 1 },
 				rezz = { enabled = true, anchorPoint = "LEFT", size = 20, x = 25, y = 0 },
-				role = { enabled = false, anchorPoint = "TOPLEFT", size = 12, x = 28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOMLEFT", size = 12, x = 17, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOPLEFT", size = 12, x = 28, y = -1 },
 			},
 			incHeal = { enabled = false, cap = 1.3, alpha = 0.8 },
 			slots = {
@@ -2297,7 +2305,8 @@ function LUF:LoadDefaults()
 				status = { enabled = false, anchorPoint = "BOTTOM", size = 16, x = 0, y = 1 },
 				ready = { enabled = true, anchorPoint = "CENTER", size = 24, x = 0, y = 0 },
 				rezz = { enabled = true, anchorPoint = "TOPRIGHT", size = 20, x = -8, y = -9 },
-				role = { enabled = false, anchorPoint = "TOPLEFT", size = 12, x = 28, y = -1 },
+				grouprole = { enabled = false, anchorPoint = "BOTTOM", size = 12, x = 0, y = 1 },
+				raidrole = { enabled = false, anchorPoint = "TOP", size = 12, x = 0, y = -1 },
 			},
 			incHeal = { enabled = false, cap = 1.3, alpha = 0.8 },
 			slots = {
