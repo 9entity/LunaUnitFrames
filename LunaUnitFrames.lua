@@ -1,7 +1,7 @@
 -- Luna Unit Frames 4.0 by Aviana
 
 LUF = select(2, ...)
-LUF.version = 4331
+LUF.version = 4337
 
 local L = LUF.L
 local ACR = LibStub("AceConfigRegistry-3.0", true)
@@ -253,6 +253,8 @@ function LUF:LoadoUFSettings()
 	
 	self.oUF.TagsWithHealTimeFrame = self.db.profile.inchealTime
 	self.oUF.TagsWithHealDisableHots = self.db.profile.disablehots
+
+	self.oUF.bearEnergy = self.db.profile.units.player.druidBar.bearEnergy
 end
 
 function LUF:ResetColors()
@@ -371,7 +373,7 @@ function LUF:OnProfileDeleted(event, key, name)
 	end
 end
 
-function LUF:AutoswitchProfile(event)
+function LUF:AutoswitchProfile(event, arg1)
 	local profile
 	if event == "DISPLAY_SIZE_CHANGED" and self.db.char.switchtype == "RESOLUTION" then
 		local resolutions = {GetScreenResolutions()}
@@ -409,6 +411,8 @@ function LUF:AutoswitchProfile(event)
 		elseif self.db.char.grpdb["NONARENA"] then
 			profile = self.db.char.grpdb["NONARENA"]
 		end
+	elseif event == "ACTIVE_TALENT_GROUP_CHANGED" and self.db.char.switchtype == "SPECIALIZATION" then
+		profile = self.db.char.specdb["SPEC"..arg1]
 	end
 	if profile and profile ~= self.db:GetCurrentProfile() then
 		self.db:SetProfile(profile)
@@ -659,6 +663,7 @@ local moduleSettings = {
 			[3] = {0,0,1},
 			[4] = {0.41,0.8,0.94},
 		}
+		mod.Totems.disableTimer = not config.timer
 		for i=1, 4 do
 			local totem = mod.Totems[i]
 			totem:SetStatusBarTexture(texture)
@@ -671,6 +676,7 @@ local moduleSettings = {
 			else
 				totem.bg:Hide()
 			end
+			totem.timer:SetFont(LUF:LoadMedia(SML.MediaType.FONT, config.font), config.fontsize)
 		end
 		mod.autoHide = config.autoHide
 		mod:Update()
@@ -679,6 +685,7 @@ local moduleSettings = {
 		mod.texture = LUF:LoadMedia(SML.MediaType.STATUSBAR, config.statusbar)
 		mod:SetStatusBarTexture(LUF:LoadMedia(SML.MediaType.STATUSBAR, config.statusbar))
 		mod.disableHide = config.autoHide
+		mod.bearEnergy = config.bearEnergy
 		if config.background then
 			mod.bg:SetTexture(mod.texture)
 			mod.bg:Show()
@@ -724,6 +731,9 @@ local moduleSettings = {
 	end,
 	runes = function(mod, config)
 		if not config.enabled then mod:Hide() return end
+		mod.Runes.fadeInactive = config.fadeInactive
+		mod.Runes.disableTimer = not config.timer
+		mod.Runes.disableGrace = not config.grace
 		local texture = LUF:LoadMedia(SML.MediaType.STATUSBAR, config.statusbar)
 		for i=1, 6 do
 			local rune = mod.Runes[i]
@@ -735,6 +745,7 @@ local moduleSettings = {
 			else
 				rune.bg:Hide()
 			end
+			rune.timer:SetFont(LUF:LoadMedia(SML.MediaType.FONT, config.font), config.fontsize)
 		end
 		mod:Update()
 	end,
@@ -1561,6 +1572,13 @@ local function SetCustomHeader(header, config)
 	local yOffset = config.offset * yMod
 	local currentAnchor = header
 
+	if not config.enabled then
+		header:Hide()
+		return
+	else
+		header:Show()
+	end
+
 	local ButtonName = header:GetName() .. "UnitButton"
 	local num = 1
 	local frame = _G[ButtonName .. num]
@@ -1796,11 +1814,11 @@ frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("PLAYER_REGEN_DISABLED")
 frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function(self, event, addon)
+frame:SetScript("OnEvent", function(self, event, arg1)
 	if( event == "PLAYER_LOGIN" ) then
 		LUF:OnLoad()
 		self:UnregisterEvent("PLAYER_LOGIN")
-	elseif( event == "ADDON_LOADED" and ( addon == "Blizzard_ArenaUI" or addon == "Blizzard_CompactRaidFrames" ) and not LUF.InCombatLockdown) then
+	elseif( event == "ADDON_LOADED" and ( arg1 == "Blizzard_ArenaUI" or arg1 == "Blizzard_CompactRaidFrames" ) and not LUF.InCombatLockdown) then
 		LUF:HideBlizzardFrames()
 	elseif event == "PLAYER_REGEN_DISABLED" then
 		LUF.InCombatLockdown = true
@@ -1833,8 +1851,15 @@ frame:SetScript("OnEvent", function(self, event, addon)
 			queuedEvent = event
 		end
 	elseif event == "PLAYER_ENTERING_WORLD" then
+		frame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 		if not LUF.InCombatLockdown then
 			LUF:AutoswitchProfile(event)
+		else
+			queuedEvent = event
+		end
+	elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then
+		if not LUF.InCombatLockdown then
+			LUF:AutoswitchProfile(event, arg1)
 		else
 			queuedEvent = event
 		end

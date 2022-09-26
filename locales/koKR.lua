@@ -215,6 +215,8 @@ local L = {
 ["Inactive alpha"] = "비활성 투명도",
 ["Speedy fade"] = "빠른 사라짐",
 ["Druid bar"] = "드루이드 바",
+["Bear Energy"] = "Bear Energy",
+["Show Energy instead of Mana in Bear Form"] = "Show Energy instead of Mana in Bear Form",
 ["Reckoning stacks"] = "징벌 중첩",
 ["Xp bar"] = "경험치 바",
 ["Combat text"] = "전투 문자",
@@ -424,6 +426,10 @@ local L = {
 ["Enable the sound when switching target"] = "대상을 변경했을 때 소리를 사용합니다.",
 ["Right click to focus"] = "Right click to focus",
 ["Focus the unit upon right clicking"] = "Focus the unit upon right clicking",
+["Fade"] = "Fade",
+["Fade when on cooldown"] = "Fade when on cooldown",
+["Rune Grace"] = "Rune Grace",
+["Highlights a rune while it does not have to be used yet to maximize efficiency"] = "Highlights a rune while it does not have to be used yet to maximize efficiency",
 }
 
 local LUF = select(2, ...)

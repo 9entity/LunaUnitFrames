@@ -4,7 +4,7 @@ local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 local SML = SML or LibStub:GetLibrary("LibSharedMedia-3.0")
 local ACR = LibStub("AceConfigRegistry-3.0", true)
 local L = LUF.L
-local resolutionselectvalue,groupselectvalue, profiledb = GetCurrentResolution(), "SOLO", {}
+local resolutionselectvalue,groupselectvalue, specselectvalue, profiledb = GetCurrentResolution(), "SOLO", "SPEC1", {}
 
 local InfoTags = {
 	["numtargeting"] = true,
@@ -322,6 +322,7 @@ function LUF:CreateConfig()
 			tbl.combatText.font = nil
 		end
 		LUF.db.profile.units.raid.font = nil
+		LUF.db.profile.units.player.runes.font = nil
 	end
 
 	local function setGrowthDir(info, value)
@@ -526,7 +527,6 @@ function LUF:CreateConfig()
 			["player"] = true,
 		},
 		["castBar"] = {
-			["pet"] = true,
 			["pettarget"] = true,
 			["pettargettarget"] = true,
 			["targettarget"] = true,
@@ -534,8 +534,6 @@ function LUF:CreateConfig()
 			["partytarget"] = true,
 			["focustarget"] = true,
 			["focustargettarget"] = true,
-			["partypet"] = true,
-			["raidpet"] = true,
 			["maintanktarget"] = true,
 			["maintanktargettarget"] = true,
 			["mainassisttarget"] = true,
@@ -3864,9 +3862,16 @@ function LUF:CreateConfig()
 				},
 				autoHide = {
 					name = L["Auto hide"],
-					desc = string.format(L["Hide when inactive"]),
+					desc = L["Hide when inactive"],
 					type = "toggle",
 					order = 2,
+				},
+				bearEnergy = {
+					name = L["Bear Energy"],
+					desc = L["Show Energy instead of Mana in Bear Form"],
+					type = "toggle",
+					order = 3,
+					set = function(info, value) LUF.oUF.bearEnergy = value set(info, value) end
 				},
 				fivesecond = {
 					name = L["Five second rule"],
@@ -4025,17 +4030,40 @@ function LUF:CreateConfig()
 					type = "toggle",
 					order = 2,
 				},
+				timer = {
+					name = L["Timer"],
+					desc = string.format(L["Enable or disable the %s."],L["Timer"]),
+					type = "toggle",
+					order = 3,
+				},
+				font = {
+					order = 4,
+					type = "select",
+					name = L["Font"],
+					dialogControl = "LSM30_Font",
+					values = getMediaData,
+					get = function(info) return get(info) or LUF.db.profile.font or SML.DefaultMedia.font end,
+				},
+				fontsize = {
+					name = FONT_SIZE,
+					desc = L["Set the font size."],
+					type = "range",
+					order = 5,
+					min = 5,
+					max = 24,
+					step = 1,
+				},
 				background = {
 					name = BACKGROUND,
 					desc = string.format(L["Enable or disable the %s."], BACKGROUND),
 					type = "toggle",
-					order = 3,
+					order = 6,
 				},
 				backgroundAlpha = {
 					name = L["Background alpha"],
 					desc = L["Set the background alpha."],
 					type = "range",
-					order = 4,
+					order = 7,
 					min = 0,
 					max = 1,
 					step = 0.01,
@@ -4044,7 +4072,7 @@ function LUF:CreateConfig()
 					name = L["Height"],
 					desc = L["Set the height."],
 					type = "range",
-					order = 5,
+					order = 8,
 					min = 1,
 					max = 10,
 					step = 0.1,
@@ -4053,13 +4081,13 @@ function LUF:CreateConfig()
 					name = L["Order"],
 					desc = L["Set the order priority."],
 					type = "range",
-					order = 6,
+					order = 9,
 					min = 0,
 					max = 100,
 					step = 5,
 				},
 				statusbar = {
-					order = 7,
+					order = 10,
 					type = "select",
 					name = L["Bar texture"],
 					dialogControl = "LSM30_Statusbar",
@@ -4070,7 +4098,7 @@ function LUF:CreateConfig()
 					name = L["Bar Group"],
 					desc = L["Select the bar stack"],
 					type = "select",
-					order = 8,
+					order = 11,
 					values = {["LEFT"] = L["Left Group"], ["RIGHT"] = L["Right Group"], ["CENTER"] = L["Center Group"]},
 				},
 			},
@@ -4157,17 +4185,52 @@ function LUF:CreateConfig()
 					type = "toggle",
 					order = 1,
 				},
+				fadeInactive = {
+					name = L["Fade"],
+					desc = L["Fade when on cooldown"],
+					type = "toggle",
+					order = 2,
+				},
+				grace = {
+					name = L["Rune Grace"],
+					desc = L["Highlights a rune while it does not have to be used yet to maximize efficiency"],
+					type = "toggle",
+					order = 3,
+				},
+				timer = {
+					name = L["Timer"],
+					desc = string.format(L["Enable or disable the %s."],L["Timer"]),
+					type = "toggle",
+					order = 4,
+				},
+				font = {
+					order = 5,
+					type = "select",
+					name = L["Font"],
+					dialogControl = "LSM30_Font",
+					values = getMediaData,
+					get = function(info) return get(info) or LUF.db.profile.font or SML.DefaultMedia.font end,
+				},
+				fontsize = {
+					name = FONT_SIZE,
+					desc = L["Set the font size."],
+					type = "range",
+					order = 6,
+					min = 5,
+					max = 24,
+					step = 1,
+				},
 				background = {
 					name = BACKGROUND,
 					desc = string.format(L["Enable or disable the %s."], BACKGROUND),
 					type = "toggle",
-					order = 2,
+					order = 7,
 				},
 				backgroundAlpha = {
 					name = L["Background alpha"],
 					desc = L["Set the background alpha."],
 					type = "range",
-					order = 3,
+					order = 8,
 					min = 0,
 					max = 1,
 					step = 0.01,
@@ -4176,7 +4239,7 @@ function LUF:CreateConfig()
 					name = L["Height"],
 					desc = L["Set the height."],
 					type = "range",
-					order = 4,
+					order = 9,
 					min = 1,
 					max = 10,
 					step = 0.1,
@@ -4185,13 +4248,13 @@ function LUF:CreateConfig()
 					name = L["Order"],
 					desc = L["Set the order priority."],
 					type = "range",
-					order = 5,
+					order = 10,
 					min = 0,
 					max = 100,
 					step = 5,
 				},
 				statusbar = {
-					order = 6,
+					order = 11,
 					type = "select",
 					name = L["Bar texture"],
 					dialogControl = "LSM30_Statusbar",
@@ -4202,7 +4265,7 @@ function LUF:CreateConfig()
 					name = L["Bar Group"],
 					desc = L["Select the bar stack"],
 					type = "select",
-					order = 7,
+					order = 12,
 					values = {["LEFT"] = L["Left Group"], ["RIGHT"] = L["Right Group"], ["CENTER"] = L["Center Group"]},
 				},
 			},
@@ -10395,7 +10458,7 @@ function LUF:CreateConfig()
 						desc = L["Type of event to switch to"],
 						type = "select",
 						order = 2,
-						values = {["DISABLED"] = ADDON_DISABLED, ["RESOLUTION"] = L["Screen Resolution"],["GROUP"] = L["Size of Group"],["ARENA"] = ARENA},
+						values = {["DISABLED"] = ADDON_DISABLED, ["RESOLUTION"] = L["Screen Resolution"],["GROUP"] = L["Size of Group"],["ARENA"] = ARENA, ["SPECIALIZATION"] = SPECIALIZATION},
 						get = function(info) return LUF.db.char.switchtype end,
 						set = function(info, value) LUF.db.char.switchtype = value LUF:AutoswitchProfileSetup() end,
 					},
@@ -10419,11 +10482,21 @@ function LUF:CreateConfig()
 						get = function(info) return groupselectvalue end,
 						set = function(info, value) groupselectvalue = value end,
 					},
+					specselect = {
+						name = SPECIALIZATION,
+						--desc = L["Size of group to assign a profile to"],
+						type = "select",
+						order = 5,
+						hidden = function() return LUF.db.char.switchtype ~= "SPECIALIZATION" end,
+						values = {["SPEC1"]=SPECIALIZATION.." 1",["SPEC2"]=SPECIALIZATION.." 2"},
+						get = function(info) return specselectvalue end,
+						set = function(info, value) specselectvalue = value end,
+					},					
 					profileselect = {
 						name = L["Profile"],
 						desc = L["Name of the profile which to switch to"],
 						type = "select",
-						order = 5,
+						order = 6,
 						values = function() LUF.db:GetProfiles(profiledb) profiledb["NIL"] = NONE return profiledb end,
 						hidden = function() return LUF.db.char.switchtype == "DISABLED" end,
 						get = function(info)
@@ -10438,6 +10511,13 @@ function LUF:CreateConfig()
 												return i
 											end
 										end
+									end
+								end
+								return "NIL"
+							elseif LUF.db.char.switchtype == "SPECIALIZATION" then
+								for k,v in pairs(profiledb) do
+									if v == LUF.db.char.specdb[specselectvalue] then
+										return k
 									end
 								end
 								return "NIL"
@@ -10461,6 +10541,8 @@ function LUF:CreateConfig()
 										return
 									end
 								end
+							elseif LUF.db.char.switchtype == "SPECIALIZATION" then
+								LUF.db.char.specdb[specselectvalue] = value ~= "NIL" and profiledb[value] or nil
 							elseif LUF.db.char.switchtype == "GROUP" then
 								LUF.db.char.grpdb[groupselectvalue] = value ~= "NIL" and profiledb[value] or nil
 							else

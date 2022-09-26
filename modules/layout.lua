@@ -110,10 +110,12 @@ local UnitSpecific = {
 				frame.Totems[i] = CreateFrame("StatusBar", nil, totemBar)
 				frame.Totems[i]:SetMinMaxValues(0,1)
 				frame.Totems[i]:SetValue(0)
+				frame.Totems[i].timer = frame.Totems[i]:CreateFontString("LUFTotemCooldown"..i, "OVERLAY")
+				frame.Totems[i].timer:SetPoint("CENTER", frame.Totems[i], "CENTER")
 				frame.Totems[i].bg = frame.Totems[i]:CreateTexture(nil, "BACKGROUND")
 				frame.Totems[i].bg:SetAllPoints(frame.Totems[i])
 			end
-			frame.Totems.PostUpdate = LUF.overrides["Totems"].PostUpdate
+			frame.Totems.PostTotemUpdate = LUF.overrides["Totems"].PostTotemUpdate
 			totemBar.Totems = frame.Totems
 			totemBar.Update = LUF.overrides["Totems"].Update
 			frame.modules.totemBar = totemBar
@@ -222,6 +224,13 @@ local UnitSpecific = {
 				Runes[i] = CreateFrame("StatusBar", nil, runes)
 				Runes[i].bg = runes:CreateTexture(nil, "BACKGROUND")
 				Runes[i].bg:SetAllPoints(Runes[i])
+				Runes[i].timer = Runes[i]:CreateFontString("LUFRuneCooldown"..i, "OVERLAY")
+				Runes[i].timer:SetPoint("CENTER", Runes[i], "CENTER")
+				Runes[i].hl = Runes[i]:CreateTexture(nil, "OVERLAY")
+				Runes[i].hl:SetTexture([[Interface\AddOns\LunaUnitFrames\media\textures\highlight]])
+				Runes[i].hl:SetBlendMode("ADD")
+				Runes[i].hl:SetAllPoints(Runes[i])
+				Runes[i].hl:Hide()
 			end
 			runes.Update = LUF.overrides["Runes"].Update
 			Runes.PostUpdate = LUF.overrides["Runes"].PostUpdate
@@ -248,6 +257,27 @@ local UnitSpecific = {
 	end,
 
 	pet = function(frame)
+	-- Castbar
+		local Castbar = CreateFrame("StatusBar", nil, frame)
+
+		local Background = Castbar:CreateTexture(nil, "BACKGROUND")
+		Background:SetAllPoints(Castbar)
+
+		local Icon = Castbar:CreateTexture(nil, "OVERLAY")
+		Icon:SetSize(10, 10)
+		Icon:SetPoint("TOPLEFT", Castbar, "TOPLEFT")
+
+		local SafeZone = Castbar:CreateTexture(nil, "OVERLAY")
+
+		Castbar.bg = Background
+		Castbar.Icon = Icon
+		Castbar.SafeZone = SafeZone
+		Castbar:SetScript("OnShow", LUF.PlaceModules)
+		Castbar:SetScript("OnHide", LUF.PlaceModules)
+		frame.Castbar = Castbar
+		frame.modules.castBar = Castbar
+		frame.modules.castBar.name = "Castbar"
+
 	-- XP Bar
 		local xpBarFrame = CreateFrame("Frame", nil, frame)
 		xpBarFrame:SetScript("OnSizeChanged", function() end)
@@ -379,7 +409,26 @@ local UnitSpecific = {
 	end,
 
 	partypet = function(frame)
-	-- Nothing here yet
+	-- Castbar
+		local Castbar = CreateFrame("StatusBar", nil, frame)
+
+		local Background = Castbar:CreateTexture(nil, "BACKGROUND")
+		Background:SetAllPoints(Castbar)
+
+		local Icon = Castbar:CreateTexture(nil, "OVERLAY")
+		Icon:SetSize(10, 10)
+		Icon:SetPoint("TOPLEFT", Castbar, "TOPLEFT")
+
+		local SafeZone = Castbar:CreateTexture(nil, "OVERLAY")
+
+		Castbar.bg = Background
+		Castbar.Icon = Icon
+		Castbar.SafeZone = SafeZone
+		Castbar:SetScript("OnShow", LUF.PlaceModules)
+		Castbar:SetScript("OnHide", LUF.PlaceModules)
+		frame.Castbar = Castbar
+		frame.modules.castBar = Castbar
+		frame.modules.castBar.name = "Castbar"
 	end,
 
 	raid = function(frame)
@@ -406,7 +455,26 @@ local UnitSpecific = {
 	end,
 	
 	raidpet = function(frame)
-	-- Nothing here yet
+	-- Castbar
+		local Castbar = CreateFrame("StatusBar", nil, frame)
+
+		local Background = Castbar:CreateTexture(nil, "BACKGROUND")
+		Background:SetAllPoints(Castbar)
+
+		local Icon = Castbar:CreateTexture(nil, "OVERLAY")
+		Icon:SetSize(10, 10)
+		Icon:SetPoint("TOPLEFT", Castbar, "TOPLEFT")
+
+		local SafeZone = Castbar:CreateTexture(nil, "OVERLAY")
+
+		Castbar.bg = Background
+		Castbar.Icon = Icon
+		Castbar.SafeZone = SafeZone
+		Castbar:SetScript("OnShow", LUF.PlaceModules)
+		Castbar:SetScript("OnHide", LUF.PlaceModules)
+		frame.Castbar = Castbar
+		frame.modules.castBar = Castbar
+		frame.modules.castBar.name = "Castbar"
 	end,
 	
 	maintank = function(frame)
@@ -778,12 +846,15 @@ function LUF.InitializeUnit(frame, unit, notHeaderChild)
 		fstrings.left = parent:CreateFontString(nil, "OVERLAY")
 		fstrings.left:SetDrawLayer("OVERLAY", 7)
 		fstrings.left:SetJustifyH("LEFT")
+		fstrings.left:SetFont("Fonts\\FRIZQT__.TTF", 8) -- prevent "font not set" errors
 		fstrings.center = parent:CreateFontString(nil, "OVERLAY")
 		fstrings.center:SetDrawLayer("OVERLAY", 7)
 		fstrings.center:SetJustifyH("CENTER")
+		fstrings.center:SetFont("Fonts\\FRIZQT__.TTF", 8)
 		fstrings.right = parent:CreateFontString(nil, "OVERLAY")
 		fstrings.right:SetDrawLayer("OVERLAY", 7)
 		fstrings.right:SetJustifyH("RIGHT")
+		fstrings.right:SetFont("Fonts\\FRIZQT__.TTF", 8)
 	end
 	
 	frame:SetScript("OnEnter", function(self)

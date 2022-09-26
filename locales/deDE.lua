@@ -218,6 +218,8 @@ local L = {
 ["Inactive alpha"] = "Inaktiv Transparenz",
 ["Speedy fade"] = "Schnelles Verblassen",
 ["Druid bar"] = "Druiden Balken",
+["Bear Energy"] = "B\195\164r Energie",
+["Show Energy instead of Mana in Bear Form"] = "Zeige Energie anstatt Mana in B\195\164r Form",
 ["Reckoning stacks"] = "Abrechnungs Stapel",
 ["Xp bar"] = "Erfahrungsbalken",
 ["Combat text"] = "Kamp Text",
@@ -427,6 +429,10 @@ local L = {
 ["Enable the sound when switching target"] = "Schalte das Ger\195\164usch bei Zielwechsel ein",
 ["Right click to focus"] = "Rechtsklick fokus",
 ["Focus the unit upon right clicking"] = "Fokussiere die Einheit bei Rechtsklick",
+["Fade"] = "Verblassen",
+["Fade when on cooldown"] = "Verblasse w\195\164hrend der Regeneration",
+["Rune Grace"] = "Runen Frist",
+["Highlights a rune while it does not have to be used yet to maximize efficiency"] = "Hebt runen hervor wenn sie noch nicht genutzt werden m\195\188ssen für maximale Effizienz",
 }
 
 local LUF = select(2, ...)

@@ -215,6 +215,8 @@ local L = {
 ["Inactive alpha"] = "戰鬥外透明度",
 ["Speedy fade"] = "快速淡出",
 ["Druid bar"] = "德魯伊法力條",
+["Bear Energy"] = "Bear Energy",
+["Show Energy instead of Mana in Bear Form"] = "Show Energy instead of Mana in Bear Form",
 ["Reckoning stacks"] = "清算（天賦）層數",
 ["Xp bar"] = "經驗條",
 ["Combat text"] = "戰鬥文字",
@@ -424,6 +426,10 @@ local L = {
 ["Enable the sound when switching target"] = "Enable the sound when switching target",
 ["Right click to focus"] = "Right click to focus",
 ["Focus the unit upon right clicking"] = "Focus the unit upon right clicking",
+["Fade"] = "Fade",
+["Fade when on cooldown"] = "Fade when on cooldown",
+["Rune Grace"] = "Rune Grace",
+["Highlights a rune while it does not have to be used yet to maximize efficiency"] = "Highlights a rune while it does not have to be used yet to maximize efficiency",
 }
 
 local LUF = select(2, ...)

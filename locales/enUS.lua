@@ -215,6 +215,8 @@ local L = {
 ["Inactive alpha"] = "Inactive alpha",
 ["Speedy fade"] = "Speedy fade",
 ["Druid bar"] = "Druid bar",
+["Bear Energy"] = "Bear Energy",
+["Show Energy instead of Mana in Bear Form"] = "Show Energy instead of Mana in Bear Form",
 ["Reckoning stacks"] = "Reckoning stacks",
 ["Xp bar"] = "Xp bar",
 ["Combat text"] = "Combat text",
@@ -425,6 +427,10 @@ local L = {
 ["Enable the sound when switching target"] = "Enable the sound when switching target",
 ["Right click to focus"] = "Right click to focus",
 ["Focus the unit upon right clicking"] = "Focus the unit upon right clicking",
+["Fade"] = "Fade",
+["Fade when on cooldown"] = "Fade when on cooldown",
+["Rune Grace"] = "Rune Grace",
+["Highlights a rune while it does not have to be used yet to maximize efficiency"] = "Highlights a rune while it does not have to be used yet to maximize efficiency",
 }
 
 LUF.L = L

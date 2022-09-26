@@ -243,7 +243,7 @@ LUF.overrides["Totems"].Update = function(self)
 	end
 end
 
-LUF.overrides["Totems"].PostUpdate = function(self, slot, haveTotem, name, start, duration, icon)
+LUF.overrides["Totems"].PostTotemUpdate = function(self)
 	local mod = self[1]:GetParent()
 	mod:Show()
 	for i=1,4 do
@@ -275,7 +275,7 @@ LUF.overrides["AdditionalPower"].PostUpdateVisibility = function(self, visible, 
 end
 
 LUF.overrides["Runes"] = {}
-LUF.overrides["Runes"].Update = function(self)
+LUF.overrides["Runes"].Update = function(self, event)
 	local Runes = self.Runes
 	local x, y = (self:GetWidth() - 5) / 6 , self:GetHeight()
 	for i=1, 6 do
@@ -285,16 +285,14 @@ LUF.overrides["Runes"].Update = function(self)
 	end
 end
 
-LUF.overrides["Runes"].PostUpdate = function(self, runemap, hasVehicle, allReady)
+LUF.overrides["Runes"].PostUpdate = function(self, runemap, hasVehicle)
 	local mod = self[1]:GetParent()
-	if hasVehicle then
-		mod:Hide()
-		mod.isDisabled = true
-	else
-		mod:Show()
-		mod.isDisabled = nil
+
+	if hasVehicle and not mod.isDisabled or not hasVehicle and mod.isDisabled then
+		mod:SetShown(mod.isDisabled)
+		mod.isDisabled = not mod.isDisabled
+		LUF.PlaceModules(mod:GetParent())
 	end
-	LUF.PlaceModules(mod:GetParent())
 end
 
 LUF.overrides["ComboPoints"] = {}
